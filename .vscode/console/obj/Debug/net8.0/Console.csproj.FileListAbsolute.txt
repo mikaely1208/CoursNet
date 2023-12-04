@@ -1,0 +1,15 @@
+/Users/miky/NET/Projets/Console/bin/Debug/net8.0/Console
+/Users/miky/NET/Projets/Console/bin/Debug/net8.0/Console.deps.json
+/Users/miky/NET/Projets/Console/bin/Debug/net8.0/Console.runtimeconfig.json
+/Users/miky/NET/Projets/Console/bin/Debug/net8.0/Console.dll
+/Users/miky/NET/Projets/Console/bin/Debug/net8.0/Console.pdb
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/Console.GeneratedMSBuildEditorConfig.editorconfig
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/Console.AssemblyInfoInputs.cache
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/Console.AssemblyInfo.cs
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/Console.csproj.CoreCompileInputs.cache
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/Console.sourcelink.json
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/Console.dll
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/refint/Console.dll
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/Console.pdb
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/Console.genruntimeconfig.cache
+/Users/miky/NET/Projets/Console/obj/Debug/net8.0/ref/Console.dll
