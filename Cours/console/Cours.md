@@ -224,4 +224,6 @@ Il contient les paramètres de configuration du projet, un peu comme les variabl
 
 Contient le code principal du projet. Il est le point d'entrée du programme. 
 
+### La configuration de l'application :
 
+Les fichiers de config sont des fichiers JSON qui sont stockés dans le dossier `appsettings.json`.
