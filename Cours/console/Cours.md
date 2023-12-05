@@ -292,3 +292,9 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 ```bash
 dotnet ef migrations add InitialCreate
 ```
+
+- Lancer la migration :
+
+```bash
+dotnet ef database update
+```

@@ -15,3 +15,16 @@ Manière pour utiliser [dotnet new webapi](https://learn.microsoft.com/en-us/dot
 ### NuGet Package Manager :
 Banque d'info des packages NuGet [NuGet](https://www.nuget.org)
 
+### Configuration de SQLite avec Entity Framework Core :
+Processus de configuration de [SQLite avec Entity Framework Core](https://jasonwatmore.com/post/2022/09/05/net-6-connect-to-sqlite-database-with-entity-framework-core)
+
+### Différents datatypes en SQLite :
+Documentation des types de données en SQLite : [SQLite](https://www.sqlite.org/datatype3.html)
+
+### Utilisation de la méthode **FromBody** :
+Article sur l'utilité et l'utilisation de [FromBody](https://stackoverflow.com/questions/51641383/frombody-attribute)
+
+### Utilisation de la méthode **ActionResult** :
+Article sur l'utilité et l'utilisation de [ActionResult](https://stackoverflow.com/questions/51641383/frombody-attribute)
+
+
