@@ -22,15 +22,18 @@ public class BooksController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(201, Type = typeof(Book))]
+    [ProducesResponseType(400)]
     public async Task Post([FromBody] Book book)
     {
         _context.Books.Add(book);
         await _context.SaveChangesAsync();
     }
 
+
     //Trouver les livres par id en methode get
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Book>> Get(int id)
+    [HttpGet("{id}", Name=nameof(GetBook))]
+    public async Task<ActionResult<Book>> GetBook(int id)
     {
         var book = await _context.Books.FindAsync(id);
         if (book == null)
