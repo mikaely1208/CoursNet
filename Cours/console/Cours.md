@@ -189,7 +189,7 @@ var maRange = array[4..^2];
 ### Le cli 
 
 les commandes utiles : 
-- **dotnet new** : pour créer un nouveau projet
+- **dotnet new** : pour créer un nouveau projet (cf. [dotnet new](BiblioPerso.md))
 - **dotnet restore** : pour déployer les librairies du projet
 - **dotnet build** : pour construire le projet
 - **dotnet run** : pour lancer le projet
@@ -227,5 +227,11 @@ Contient le code principal du projet. Il est le point d'entrée du programme.
 ### La configuration de l'application :
 
 Les fichiers de config sont des fichiers JSON qui sont stockés dans le dossier `appsettings.json`.
+
+
+### API : 
+![Alt text](image4.png "Explained API")
+Explication API : cf. [BiblioPerso](BiblioPerso.md)
+
 
 
