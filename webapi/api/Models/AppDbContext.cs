@@ -12,6 +12,8 @@ public class AppDbContext : DbContext
    
    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
    {
+       var currentDirectory = Directory.GetCurrentDirectory();
+       Console.WriteLine(currentDirectory);
        optionsBuilder.UseSqlite(ConnectionString);
    }
 
