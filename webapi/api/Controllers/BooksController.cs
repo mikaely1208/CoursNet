@@ -24,12 +24,28 @@ public class BooksController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(Book))]
     [ProducesResponseType(400)]
-    public async Task Post([FromBody] Book book)
-    {
-        _context.Books.Add(book);
-        await _context.SaveChangesAsync();
-    }
-
+   public async Task<ActionResult<Book>> PostBook([FromBody] Book book)
+   {
+       if (book == null)
+       {
+           return BadRequest();
+       }
+       Book? addedBook = await _context.Books.FirstOrDefaultAsync(b => b.Title == book.Title);
+       if (addedBook != null)
+       {
+           return BadRequest("Ce livre existe déjà");
+       }
+       else 
+       {
+           await _context.Books.AddAsync(book);
+           await _context.SaveChangesAsync();
+   
+           return CreatedAtRoute(
+               "GetBook",
+               routeValues: new { id = book.Id },
+               value: book);
+       }
+   }
 
     //Trouver les livres par id en methode get
     [HttpGet("{id}", Name=nameof(GetBook))]
@@ -42,4 +58,32 @@ public class BooksController : ControllerBase
         }
         return book;
     }
+
+    // méthode put : api/Book/[id] creer la route qui permet de mettre a jour un livre existant
+    [HttpPut("{id}")]
+    public async Task<ActionResult> PutBook(int id, [FromBody] Book book)
+    {
+        if (id != book.Id)
+        {
+            return BadRequest();
+        }
+        _context.Entry(book).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return Ok();
+    }
+
+    // méthode delete : api/Book/[id] creer la route qui permet de supprimer un livre existant
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteBook(int id)
+    {
+        var book = await _context.Books.FindAsync(id);
+        if (book == null)
+        {
+            return NotFound();
+        }
+        _context.Books.Remove(book);
+        await _context.SaveChangesAsync();
+        return Ok();
+    }
+
 }
