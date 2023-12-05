@@ -30,6 +30,7 @@ namespace api.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Genre")
+                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
@@ -42,11 +43,13 @@ namespace api.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 #pragma warning restore 612, 618
         }

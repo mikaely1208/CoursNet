@@ -17,6 +17,7 @@ public class AppDbContext : DbContext
        optionsBuilder.UseSqlite(ConnectionString);
    }
 
+    
     // Création propriété pour chaque table de la bdd
     public DbSet<Book> Books { get; set; } // à partir de l'entité book on crée la table books
 
