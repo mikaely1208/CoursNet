@@ -233,5 +233,64 @@ Les fichiers de config sont des fichiers JSON qui sont stockés dans le dossier 
 ![Alt text](image4.png "Explained API")
 Explication API : cf. [BiblioPerso](BiblioPerso.md)
 
+### NuGet Package Manager :
+Se rendre sur [NuGet](https://www.nuget.org) pour voir l'entièreté des commandes pour les packages NuGet.
 
+Ici on utilise : 
+```bash
+dotnet add package Microsoft.EntityFrameworkCore --version 8.0.0
+```
+
+
+### Configuration de SQLite
+
+- Ajout des packets suivants : 
+
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.0
+```
+Et 
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 8.0.0
+```
+
+- Installation des outils en ligne de commande :
+
+```bash
+dotnet tool install --global dotnet-ef
+```
+
+- Creer une classe qui hérite du `DbContext` :
+
+```c#
+public class MyDbContext : DbContext
+{
+    public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
+    {
+    }
+}
+```
+- Ajout de la propriété de type DbSet<T> pour chauqe entité
+
+```c#
+public DbSet<MyEntity> MyEntities { get; set; }
+```
+
+- Ajouter une méthode de OnConfiguring pour la connexion à la base de données :
+
+```c#
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    optionsBuilder.UseSqlite("Data Source=MyDatabase.db");
+}
+```
+
+- Trouver le moyen de spécifier le bon chemin pour le fichier de la base de données :
+
+- Utiliser la commande pour la première migration :
+
+```bash
+dotnet ef migrations add InitialCreate
+```
+- Analyse du code généré par la migration : 
 

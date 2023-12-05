@@ -12,3 +12,6 @@ Modèle de compréhension :[API](https://aws.amazon.com/fr/what-is/api/#:~:text=
 ### Dotnet new :
 Manière pour utiliser [dotnet new webapi](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new-sdk-templates#webapi)
 
+### NuGet Package Manager :
+Banque d'info des packages NuGet [NuGet](https://www.nuget.org)
+
