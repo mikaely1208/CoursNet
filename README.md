@@ -1,3 +1,5 @@
 # CoursNet
 
-test
+cf. [BiblioPerso](BiblioPerso.md) & [Cours](Cours.md)
+
+
