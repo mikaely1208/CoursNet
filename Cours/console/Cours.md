@@ -298,3 +298,8 @@ dotnet ef migrations add InitialCreate
 ```bash
 dotnet ef database update
 ```
+
+
+Validation model avec ModelState et utilisation de DTOs avec annotations
+AutoMapper = automatiquement réaliser les mappages entre les objets et les DTOs 
+repository pattern 
