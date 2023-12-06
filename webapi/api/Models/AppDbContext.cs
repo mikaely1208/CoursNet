@@ -1,23 +1,25 @@
 namespace webapi;
 using Microsoft.EntityFrameworkCore; // plugins qui vient d'être installer par `dotnet add package Microsoft.EntityFrameworkCore --version 8.0.0`
+
+// ce fichier sert à initialiser le context et le faire pointer vers la table Books
 public class AppDbContext : DbContext
 {
    
         // Remplacer la connection String par une connection strign valide, plus tard utiliser la config pour la connection string
         // comment trouver le serveur de base de donnée, le nom de la base de donnée, le nom d'utilisateur et le mot de passe
 
-   private static readonly string path = Path.Combine("..", "LocalDatabase.db");
+   private static readonly string path = Path.Combine("..", "LocalDatabase.db"); // chemin vers la base de donnée
    
-   private static readonly string ConnectionString = ($"Filename={path}");
+   private static readonly string ConnectionString = ($"Filename={path}"); // connection string pour la base de donnée
    
-   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) // sert à initialiser le context
    {
-       var currentDirectory = Directory.GetCurrentDirectory();
-       Console.WriteLine(currentDirectory);
-       optionsBuilder.UseSqlite(ConnectionString);
+       var currentDirectory = Directory.GetCurrentDirectory(); // chemin vers le dossier courant
+       Console.WriteLine(currentDirectory); // affiche le chemin vers le dossier courant
+       optionsBuilder.UseSqlite(ConnectionString); // utilise la connection string
    }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder) 
     {
         modelBuilder.Entity<Book>().HasData(
             new Book

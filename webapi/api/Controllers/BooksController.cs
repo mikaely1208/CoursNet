@@ -1,6 +1,7 @@
 namespace webapi.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+// ce fichier contient le controlleur d'api pour books 
 
 [ApiController] // indique a l'execution que cette classe est un controlleur d'api 
 [Route("api/[controller]")] // définie le chemin racine de ttes les routes qui doivent arriver dans cette instance
@@ -13,43 +14,43 @@ public class BooksController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
-    public async Task<IEnumerable<Book>> Get()
+    [HttpGet] // indique a l'execution que cette methode est une methode get
+    public async Task<IEnumerable<Book>> Get() // cette ligne sert à recuperer tous les livres avec la methode Get
     {
     
-        return await _context.Books.ToListAsync();
+        return await _context.Books.ToListAsync();// ici on utilise await car on est dans une tache asynchrone
 
     }
 
-    [HttpPost]
-    [ProducesResponseType(201, Type = typeof(Book))]
-    [ProducesResponseType(400)]
-   public async Task<ActionResult<Book>> PostBook([FromBody] Book book)
+    [HttpPost] // indique a l'execution que cette methode est une methode post
+    [ProducesResponseType(201, Type = typeof(Book))] // indique a l'execution que cette methode renvoie un code 201
+    [ProducesResponseType(400)] // indique a l'execution que cette methode renvoie un code 400
+   public async Task<ActionResult<Book>> PostBook([FromBody] Book book) // cette ligne sert à ajouter un livre avec la methode Post
    {
        if (book == null)
        {
            return BadRequest();
        }
-       Book? addedBook = await _context.Books.FirstOrDefaultAsync(b => b.Title == book.Title);
+       Book? addedBook = await _context.Books.FirstOrDefaultAsync(b => b.Title == book.Title); // FirstOrDefaultAsync fonctionne comme FindAsync mais renvoie le premier element
        if (addedBook != null)
        {
            return BadRequest("Ce livre existe déjà");
        }
        else 
        {
-           await _context.Books.AddAsync(book);
-           await _context.SaveChangesAsync();
+           await _context.Books.AddAsync(book); // AddAsync fonctionne comme Add mais renvoie une tache asynchrone
+           await _context.SaveChangesAsync(); // SaveChangesAsync fonctionne comme SaveChanges mais renvoie une tache asynchrone
    
-           return CreatedAtRoute(
+           return CreatedAtRoute( // methode CreatedAtRoute pour créer une réponse HTTP avec un code de statut 201 (Créé) et un en-tête Location qui spécifie l'URI de la ressource
                "GetBook",
-               routeValues: new { id = book.Id },
+               routeValues: new { id = book.Id }, // routeValues est un dictionnaire qui contient les paramètres de la route
                value: book);
        }
    }
 
     //Trouver les livres par id en methode get
-    [HttpGet("{id}", Name=nameof(GetBook))]
-    public async Task<ActionResult<Book>> GetBook(int id)
+    [HttpGet("{id}", Name=nameof(GetBook))] // indique a l'execution que cette methode est une methode get
+    public async Task<ActionResult<Book>> GetBook(int id) 
     {
         var book = await _context.Books.FindAsync(id);
         if (book == null)
@@ -60,7 +61,7 @@ public class BooksController : ControllerBase
     }
 
     // méthode put : api/Book/[id] creer la route qui permet de mettre a jour un livre existant
-    [HttpPut("{id}")]
+    [HttpPut("{id}")] // indique a l'execution que cette methode est une methode put
     public async Task<ActionResult> PutBook(int id, [FromBody] Book book)
     {
         if (id != book.Id)
@@ -73,8 +74,8 @@ public class BooksController : ControllerBase
     }
 
     // méthode delete : api/Book/[id] creer la route qui permet de supprimer un livre existant
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteBook(int id)
+    [HttpDelete("{id}")] // indique a l'execution que cette methode est une methode delete
+    public async Task<ActionResult> DeleteBook(int id) 
     {
         var book = await _context.Books.FindAsync(id);
         if (book == null)
