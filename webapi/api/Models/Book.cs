@@ -11,8 +11,8 @@ public class Book
     public int Id { get; set; }
 
     [Required]
-    [Column(TypeName = "nvarchar(50)")]
-    [StringLength(50)]
+    [Column(TypeName = "nvarchar(4)")]
+    [StringLength(4)]
     public string? Title { get; set; } = null!;
 
 
