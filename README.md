@@ -4,6 +4,6 @@ Pour consulter les liens et explications permettant de commencer à utiliser .NE
 
 Pour suivre le contenu appris durant la semaine de formation et les étapes à suivre, rendez-vous sur [Cours](Cours.md).
 
-Sinon direction le code dans le dossier [webapi](webapi) pour voir le code 👨🏽‍💻 
+Sinon direction le code dans le dossier [webapi](webapi) pour en voir plus 👨🏽‍💻 
 
 
