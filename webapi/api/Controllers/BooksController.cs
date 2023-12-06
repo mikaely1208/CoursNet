@@ -3,18 +3,32 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookService.Models;
+using AutoMapper;
 // ce fichier contient le controlleur d'api pour books 
 
 [ApiController] // indique a l'execution que cette classe est un controlleur d'api 
 [Route("api/[controller]")] // définie le chemin racine de ttes les routes qui doivent arriver dans cette instance
 public class BooksController : ControllerBase
 {
+       
+    public readonly IMapper _mapper;
     private readonly AppDbContext _context;
 
-    public BooksController(AppDbContext context) // cette ligne sert a initialiser le context et le faire pointer vers la table Books 
+    public BooksController(AppDbContext context, IMapper mapper) // cette ligne sert a initialiser le context et le faire pointer vers la table Books 
     {
         _context = context;
+        _mapper = mapper;
     }
+
+    // [HttpPost]
+    // public async Task<IActionResult> Post(BookDTO book)
+    // {
+    //     var mappedBook = _mapper.Map<Book>(book);
+    //     _context.Books.Add(mappedBook);
+    //     await _context.SaveChangesAsync();
+    //     return CreatedAtAction(nameof(Get), new { id = mappedBook.Id }, mappedBook);
+    // }
+        
 
     [HttpGet] // indique a l'execution que cette methode est une methode get
     public async Task<IEnumerable<Book>> Get() // cette ligne sert à recuperer tous les livres avec la methode Get
@@ -63,27 +77,26 @@ public class BooksController : ControllerBase
         return book;
     }
 
-   [HttpGet("dto")]
-   public async Task<ActionResult<IEnumerable<BookGetDTO>>> GetBookDTO(string title)
-   {
-       var books = await _context.Books.Where(b => b.Title == title).Select(b => new BookGetDTO
-           {
-               Title = b.Title,
-               Author = b.Author,
-               Genre = b.Genre,
-               PublishDate = b.PublishDate,
-               Description = b.Description,
-               Remarks = b.Remarks
-           })
-           .ToListAsync();
-   
-       if (books == null)
-       {
-           return NotFound();
-       }
-   
-       return Ok(books);
-   }
+  [HttpGet("dto")]
+  public async Task<ActionResult<BookGetDTO>> GetBookDTO(string title)
+  {
+      var book = await _context.Books.FirstOrDefaultAsync(b => b.Title == title);
+      if (book == null)
+      {
+          return NotFound();
+      }
+      var bookDTO = new BookGetDTO
+      {
+          Title = book.Title,
+          Author = book.Author,
+          Genre = book.Genre,
+          PublishDate = book.PublishDate,
+          Description = book.Description,
+          Remarks = book.Remarks
+      };
+      
+      return bookDTO;
+  }
 
   
 
@@ -100,11 +113,19 @@ public class BooksController : ControllerBase
             return NotFound();
         }
     
-        if (updatedBook.Title != book.Title) // on appelle le title a la place de l'id car notre dto n'inclue pas l'id
+        if (updatedBook.Title != book.Title)
         {
             return BadRequest();
         }
         
+        // mettre à jour les propriétés du livre ici en utilisant les propriétés du DTO
+        updatedBook.Title = book.Title;
+        updatedBook.Author = book.Author;
+        updatedBook.Genre = book.Genre;
+        updatedBook.Price = book.Price;
+        updatedBook.Description = book.Description;
+        updatedBook.Remarks = book.Remarks;
+
         await _context.SaveChangesAsync();
     
         return NoContent();
