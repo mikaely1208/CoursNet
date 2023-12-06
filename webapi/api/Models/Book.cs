@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 // ce fichier contient la classe book et ses attributs 
 public class Book
 {
-    [Key]
+    [Key] // annote la colonne comme une clef primaire
     public int Id { get; set; }
 
     [Required]

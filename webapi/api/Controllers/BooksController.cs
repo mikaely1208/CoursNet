@@ -1,6 +1,8 @@
 namespace webapi.Controllers;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BookService.Models;
 // ce fichier contient le controlleur d'api pour books 
 
 [ApiController] // indique a l'execution que cette classe est un controlleur d'api 
@@ -21,6 +23,7 @@ public class BooksController : ControllerBase
         return await _context.Books.ToListAsync();// ici on utilise await car on est dans une tache asynchrone
 
     }
+
 
     [HttpPost] // indique a l'execution que cette methode est une methode post
     [ProducesResponseType(201, Type = typeof(Book))] // indique a l'execution que cette methode renvoie un code 201
@@ -60,17 +63,51 @@ public class BooksController : ControllerBase
         return book;
     }
 
+   [HttpGet("dto")]
+   public async Task<ActionResult<IEnumerable<BookGetDTO>>> GetBookDTO(string title)
+   {
+       var books = await _context.Books.Where(b => b.Title == title).Select(b => new BookGetDTO
+           {
+               Title = b.Title,
+               Author = b.Author,
+               Genre = b.Genre,
+               PublishDate = b.PublishDate,
+               Description = b.Description,
+               Remarks = b.Remarks
+           })
+           .ToListAsync();
+   
+       if (books == null)
+       {
+           return NotFound();
+       }
+   
+       return Ok(books);
+   }
+
+  
+
     // méthode put : api/Book/[id] creer la route qui permet de mettre a jour un livre existant
-    [HttpPut("{id}")] // indique a l'execution que cette methode est une methode put
-    public async Task<ActionResult> PutBook(int id, [FromBody] Book book)
+    [HttpPut("{id}")]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    public async Task<ActionResult<Book>> PutBook(int id, [FromBody] BookUpdateDTO book)
     {
-        if (id != book.Id)
+        var updatedBook = await _context.Books.FindAsync(id);
+    
+        if (updatedBook == null)
+        {
+            return NotFound();
+        }
+    
+        if (updatedBook.Title != book.Title) // on appelle le title a la place de l'id car notre dto n'inclue pas l'id
         {
             return BadRequest();
         }
-        _context.Entry(book).State = EntityState.Modified;
+        
         await _context.SaveChangesAsync();
-        return Ok();
+    
+        return NoContent();
     }
 
     // méthode delete : api/Book/[id] creer la route qui permet de supprimer un livre existant
