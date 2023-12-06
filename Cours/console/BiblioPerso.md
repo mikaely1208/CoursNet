@@ -27,4 +27,16 @@ Article sur l'utilité et l'utilisation de [FromBody](https://stackoverflow.com/
 ### Utilisation de la méthode **ActionResult** :
 Article sur l'utilité et l'utilisation de [ActionResult](https://stackoverflow.com/questions/51641383/frombody-attribute)
 
+### Annotations : 
+Documentation sur l'utilisation des [Annotations](https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.relationalpropertyannotations.annotations?view=efcore-2.2)
 
+### Annotations des données :
+Documentation sur l'utilisation des [Data Annotations](https://learn.microsoft.com/fr-fr/dotnet/api/system.componentmodel.dataannotations?view=net-8.0)
+
+### DTO : 
+Comment initialiser une [DTO](https://learn.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-5)
+
+### AutoMapper : 
+Injection de dépendance [AutoMapper](https://docs.automapper.org/en/stable/Dependency-injection.html)
+
+Ajout d'[AutoMapper](https://dev.to/moe23/add-automapper-to-net-6-3fdn) dans le projet 

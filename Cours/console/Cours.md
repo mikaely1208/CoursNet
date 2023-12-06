@@ -299,12 +299,27 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
+### Schéma de base de données :
 
-Validation model avec ModelState et utilisation de DTOs avec annotations
-créer classe model dto 
+![Schema](schema.png)
+
+Ici, on peut avoir les équivalents de :
+
+- Route handler : Controller
+- Mongoose : EntityFramework
+- model : Table
+- MongoDB : SQLite
 
 
+### AutoMapper :
+AutoMapper est une librairie qui permet de mapper des DTOs (Data Transfer Objects).
+Il est utilisé pour :
+- mapper des objets d'un type vers un autre
+- mapper des objets d'un type vers un autre avec des relations
 
+Pour l'installer, on utilise  la commande suivante :
 
-AutoMapper = automatiquement réaliser les mappages entre les objets et les DTOs 
-repository pattern  
+```bash
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 12.0.1
+```
+Pour son implementation dans le code je me suis servi des documentations présentes dans la partie [Automapper](BiblioPerso.md) de ma [Biblio Perso](BiblioPerso.md)
