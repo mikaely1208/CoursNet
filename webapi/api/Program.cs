@@ -1,13 +1,16 @@
 
-namespace api;
+namespace webapi;
 using Microsoft.EntityFrameworkCore;
-using webapi;
+using api;
+using System.Reflection;
+using System;
 
 public class Program
 {
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        Assembly a = typeof(Program).Assembly;
 
         // Add services to the container.
         builder.Services.AddDbContext<AppDbContext>();
