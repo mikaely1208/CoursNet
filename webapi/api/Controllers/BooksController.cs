@@ -20,23 +20,21 @@ public class BooksController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet("mapping")]
-    public async Task<ActionResult<Book>> Get(BookDTO book)
+    [HttpGet("mapping")] // methode get avec un mapping 
+    public async Task<ActionResult<BookDTO>> GetDTO(int id)
     {
-        var mappedBook = _mapper.Map<Book>(book);
-        _context.Books.Add(mappedBook);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(Get), new { id = mappedBook.Id }, mappedBook);
+        var book = await _context.Books.FindAsync(id);
+        if (book == null)
+        {
+            return NotFound();
+        }
+        var bookDTO = new BookDTO();
+        bookDTO = _mapper.Map<BookDTO>(book);
+        return bookDTO;
+     
     }
 
-    [HttpPost("mapping")]
-    public async Task<ActionResult<Book>> Post(BookDTO book)
-    {
-        var mappedBook = _mapper.Map<Book>(book);
-        _context.Books.Add(mappedBook);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(Get), new { id = mappedBook.Id }, mappedBook);
-    }
+    
 
     [HttpGet] // indique a l'execution que cette methode est une methode get
     public async Task<IEnumerable<Book>> Get() // cette ligne sert à recuperer tous les livres avec la methode Get
