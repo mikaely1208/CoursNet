@@ -301,5 +301,10 @@ dotnet ef database update
 
 
 Validation model avec ModelState et utilisation de DTOs avec annotations
+créer classe model dto 
+
+
+
+
 AutoMapper = automatiquement réaliser les mappages entre les objets et les DTOs 
-repository pattern 
+repository pattern  
