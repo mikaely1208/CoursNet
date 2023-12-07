@@ -1,9 +1,12 @@
 namespace webapi.Controllers;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookService.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Cors;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 // ce fichier contient le controlleur d'api pour books 
 
 [ApiController] // indique a l'execution que cette classe est un controlleur d'api 
@@ -20,6 +23,7 @@ public class BooksController : ControllerBase
         _mapper = mapper;
     }
 
+    [EnableCors("MyAllowSpecificOrigins")]
     [HttpGet("mapping")] // methode get avec un mapping 
     public async Task<ActionResult<BookDTO>> GetDTO(int id)
     {
@@ -33,7 +37,7 @@ public class BooksController : ControllerBase
         return bookDTO;
      
     }
-
+    [EnableCors("MyAllowSpecificOrigins")]
     [HttpPost("mapping")] // méthode POST avec un mapping
     public async Task<ActionResult<BookDTO>> PostDTO(BookDTO bookDTO)
     {
@@ -46,7 +50,7 @@ public class BooksController : ControllerBase
 
 
     
-
+    [EnableCors("MyAllowSpecificOrigins")]
     [HttpGet] // indique a l'execution que cette methode est une methode get
     public async Task<IEnumerable<Book>> Get() // cette ligne sert à recuperer tous les livres avec la methode Get
     {
@@ -55,7 +59,7 @@ public class BooksController : ControllerBase
 
     }
 
-
+    [EnableCors("MyAllowSpecificOrigins")]
     [HttpPost] // indique a l'execution que cette methode est une methode post
     [ProducesResponseType(201, Type = typeof(Book))] // indique a l'execution que cette methode renvoie un code 201
     [ProducesResponseType(400)] // indique a l'execution que cette methode renvoie un code 400
@@ -82,6 +86,7 @@ public class BooksController : ControllerBase
        }
    }
 
+    [EnableCors("MyAllowSpecificOrigins")]
     //Trouver les livres par id en methode get
     [HttpGet("{id}", Name=nameof(GetBook))] // indique a l'execution que cette methode est une methode get
     public async Task<ActionResult<Book>> GetBook(int id) 
@@ -94,7 +99,8 @@ public class BooksController : ControllerBase
         return book;
     }
 
-  [HttpGet("dto")]
+    [EnableCors("MyAllowSpecificOrigins")]
+    [HttpGet("dto")]
   public async Task<ActionResult<BookGetDTO>> GetBookDTO(string title)
   {
       var book = await _context.Books.FirstOrDefaultAsync(b => b.Title == title);
@@ -116,7 +122,7 @@ public class BooksController : ControllerBase
   }
 
   
-
+    [EnableCors("MyAllowSpecificOrigins")]
     // méthode put : api/Book/[id] creer la route qui permet de mettre a jour un livre existant
     [HttpPut("{id}")]
     [ProducesResponseType(204)]
@@ -148,6 +154,9 @@ public class BooksController : ControllerBase
         return NoContent();
     }
 
+
+
+    [EnableCors("MyAllowSpecificOrigins")]
     // méthode delete : api/Book/[id] creer la route qui permet de supprimer un livre existant
     [HttpDelete("{id}")] // indique a l'execution que cette methode est une methode delete
     public async Task<ActionResult> DeleteBook(int id) 

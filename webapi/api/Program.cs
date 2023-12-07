@@ -5,10 +5,12 @@ using System;
 using AutoMapper;
 using BookService.Models;
 
+
 public class Program
 {
     public static void Main(string[] args)
     {
+        var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         var builder = WebApplication.CreateBuilder(args);
         Assembly a = typeof(Program).Assembly;
 
@@ -16,9 +18,16 @@ public class Program
         builder.Services.AddDbContext<AppDbContext>();
         builder.Services.AddControllers();
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: MyAllowSpecificOrigins,
+                        policy =>
+                        {
+                            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                        });
+    });
 
         var app = builder.Build();
 
@@ -31,12 +40,17 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        app.UseRouting();
+
+        app.UseCors(MyAllowSpecificOrigins);
+
         app.UseAuthorization();
 
 
         app.MapControllers();
 
         app.Run();
+        
     }
 }
 
