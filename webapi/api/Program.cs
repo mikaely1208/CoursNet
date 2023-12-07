@@ -1,9 +1,9 @@
 
 namespace webapi;
-using Microsoft.EntityFrameworkCore;
-using api;
 using System.Reflection;
 using System;
+using AutoMapper;
+using BookService.Models;
 
 public class Program
 {
@@ -37,5 +37,14 @@ public class Program
         app.MapControllers();
 
         app.Run();
+    }
+}
+
+public class Mapping:Profile
+{
+    public Mapping()
+    {
+       // mapping de book vers bookDTO
+       CreateMap<BookDTO, Book>();
     }
 }

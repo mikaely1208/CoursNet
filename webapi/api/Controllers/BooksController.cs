@@ -33,7 +33,17 @@ public class BooksController : ControllerBase
         return bookDTO;
      
     }
+
+    [HttpPost("mapping")] // méthode POST avec un mapping
+    public async Task<ActionResult<BookDTO>> PostDTO(BookDTO bookDTO)
+    {
+        var book = _mapper.Map<Book>(bookDTO);
+        _context.Books.Add(book);
+        await _context.SaveChangesAsync();
     
+        return CreatedAtAction(nameof(GetDTO), new { id = book.Id }, bookDTO);
+    }
+
 
     
 
