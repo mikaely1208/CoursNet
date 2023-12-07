@@ -1,12 +1,12 @@
-1: Expliquez la différence entre ASP.NET Core et ASP.NET Framework.
-(2 points)
+# 1 : Expliquez la différence entre ASP.NET Core et ASP.NET Framework.
+
 
 ASP.NET Core est une version plus récente de ASP.NET.
 Il est cross platform. ASP.NET Framework est lui propriétaire et donc seulement disponible sur Windows.
 ASP.NET Core est aussi plus léger quand on développe car il dépend de CoreCLR (c'est Common Language Runtime)
 
-2 : Quels sont les principaux composants d'une API ASP.NET Core et comment ils interagissent entre eux ? (un schéma est attendu)
-(3 points)
+# 2 : Quels sont les principaux composants d'une API ASP.NET Core et comment ils interagissent entre eux ? (un schéma est attendu)
+
 
 ![Schema](SchemaExam.png)
 
@@ -30,7 +30,7 @@ Ensuite le controlleur utilise les modeles de donnees pour valider les données 
 Si il y a une erreur, les gestionnaires d'erreur sont utilisés pour renvoyer les reponses aux clients.
 
 
-3: Comment configurer le routage dans une application ASP.NET Core ? Donnez un exemple à partir du code fourni.
+# 3: Comment configurer le routage dans une application ASP.NET Core ? Donnez un exemple à partir du code fourni.
 
 Pour configurer le routage, d'après le code fourni, on peut suivre ces étapes : 
 On ouvre notre fichier Program.cs et on ajoute la méthode UseEndpoints de l'objet app comme ceci: 
@@ -54,12 +54,12 @@ et  [Route("api/v{version:apiVersion}/cities/{cityId}/pointsofinterest")]
 ```
 
 
-4: Expliquez le rôle des attributs [HttpGet], [HttpPost], etc., dans la définition des actions du contrôleur.
+# 4: Expliquez le rôle des attributs [HttpGet], [HttpPost], etc., dans la définition des actions du contrôleur.
 
 Ces attributs sont utilisés pour spécifier le type de requête HTTP que l'action doit traiter. Chaque attribut correspond à une méthode HTTP spécifique. Par exemple, l'attribut [HttpGet] indique que l'action qui doit être appelée quand on fait requête HTTP GET est effectuée vers l'URL correspondante. Pareil pour Put, Post ou Delete. 
 
 
-5: Comment pouvez-vous valider les données d'entrée dans une API ASP.NET Core ? Donnez des exemples de techniques de validation.
+# 5: Comment pouvez-vous valider les données d'entrée dans une API ASP.NET Core ? Donnez des exemples de techniques de validation.
 
 Pour valider les données d'entrées, je vais parler de deux techniques utilisées au cours de cette semaine :
 - La validation par annotations de modèles. On peut utiliser les attributs de validation que .NET nous donne comme [Required] ou [StringLength] pour indiquer les règles de validations directement dans les modèles de nos données. 
@@ -82,7 +82,7 @@ if (!ModelState.IsValid) // on vérifie si le modele n'est pas valide
 
 
 
-6 : D'après vos connaissances actuelles, expliquez le fonctionnement de l'application fournie, quel outil permet d'avoir un aperçu des fonctionnalités d'une API .NET. ?
+# 6 : D'après vos connaissances actuelles, expliquez le fonctionnement de l'application fournie, quel outil permet d'avoir un aperçu des fonctionnalités d'une API .NET. ?
 
 
 L'outil qui permet d'avoir un aperçu des fonctionnalités se nomme Swagger. C'est est une interface de documentation de API. Il fournit des interfaces pour montrer les fonctionnalités d'une API, les endpoints, les paramètres, les réponses et les erreurs.
@@ -108,7 +108,7 @@ On peut également noter la présence d'une base de donnée locale où sont donc
 L'application sert donc, apres s'être authentifié à récupérer des villes pour savoir quels sont les lieux intéressants que l'on pourrait visiter dans celle-ci. 
 
 
-7 :L'application ne build pas, pourquoi ? Expliquez comment corriger l'erreur de compilation.
+# 7 :L'application ne build pas, pourquoi ? Expliquez comment corriger l'erreur de compilation.
 
 Ici, l'application ne build pas car dans le controller (CitiesController) la méthode get a déjà un nom de fonction initialisé à 'GetCity' dans la première méthode Get. Pour corriger cela, il suffit simplement de changer le nom dans la deuxième ou la première méthode Get. 
 On peut par exemple mettre : 
