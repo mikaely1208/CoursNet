@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Get";
+}
+<h1>@ViewData["Title"]</h1>
+
+<button id=boutonGet>Rechercher</button>
+<div id=divContainer></div>
+
+<script>
+    document.getElementById("boutonGet").addEventListener("click", function () {
+        fetchData();
+    });
+    function fetchData() {
+        fetch("http://localhost:5149/api/Books")
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                displayData(data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            }
+    function displayData(data) {
+        var container = document.getElementById("divContainer"); // on recupere les elements par leur id 
+        container.innerHTML = "<h3>Livre</h3>"; // on place le resultat dans un container nommé livre
+        
+        var tableau = document.createElement("tableau"); // on cree un tableau
+        tableau.border = "1"; // on definit la bordure du tableau
+        tableau.style.borderCollapse = "collapse"; 
+
+        var headerRow = tableau.insertRow();
+        for (var prop in data[0]) {
+            var cell = headerRow.insertCell(-1);
+            cell.innerHTML = prop;
+        }
+
+        // on ajoute les données dans le tableau
+        for (var i = 0; i < data.length; i++) {
+            var row = tableau.insertRow();
+            var cell = row.insertCell();
+            cell.innerHTML = data[i].title;
+            var cell = row.insertCell();
+            cell.innerHTML = data[i].author;
+
+        }
+        dataContainer.appendChild(tableau);
+    }
+
+</script>
