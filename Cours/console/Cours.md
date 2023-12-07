@@ -186,6 +186,10 @@ var maRange = array[4..^2];
 
 ## Les fonctionnalités .NET Core
 
+### Swagger 
+
+***Swagger*** est une interface de documentation de API. Il fournit des interfaces pour montrer les fonctionnalités d'une API, les endpoints, les paramètres, les réponses et les erreurs.
+
 ### Le cli 
 
 les commandes utiles : 
