@@ -119,7 +119,7 @@ public async Task<IActionResult> GetCityEXAMEN(
 Dans ce cas, l'application build correctement 
 
 
-8: Tentez faire fonctionner un poitn d'entree securisé, une erreur d'exécution se produit, pourquoi ? Comment la corriger ?
+# 8 :Tentez faire fonctionner un poitn d'entree securisé, une erreur d'exécution se produit, pourquoi ? Comment la corriger ?
 
-Une erreur se produit car dans l'annotation [HttpGet] du fichier CitiesController.cs, le chemin spécifié est deux fois le même pour de Get : On a [HttpGet("{id}")] deux fois. Donc au moment du build, cela fonctionne mais au moment du run, cela plante. 
-Il faut donc modifier le chemin de l'un des deux : [HttpGet("{id2}")] et cela fonctionne. 
+Une erreur se produit car dans l'annotation [HttpGet] du fichier CitiesController.cs, le chemin spécifié est deux fois le même pour de Get : On a ``[HttpGet("{id}")]`` deux fois. Donc au moment du build, cela fonctionne mais au moment du run, cela plante. 
+Il faut donc modifier le chemin de l'un des deux : ``[HttpGet("{id2}")]`` et cela fonctionne. 
